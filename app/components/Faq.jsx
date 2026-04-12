@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "../config/site";
+import { ArrowDown } from "lucide-react";
 
 export default function FAQ() {
   const [activeIndexes, setActiveIndexes] = useState([]);
@@ -77,6 +78,24 @@ export default function FAQ() {
         </div>
 
       </div>
+      <div className="text-center mt-12 flex flex-col items-center gap-2">
+        <p></p>
+<p></p>
+        <p></p>
+<p></p>
+
+  <p className="text-black font-bold text-lg">
+    ¿Todavía tenés dudas?
+  </p>
+<p></p>
+<p></p>
+  <a
+    href="#contacto"
+    className="text-[var(--primary)] animate-bounce"
+  >
+    <ArrowDown size={50} />
+  </a>
+</div>
     </section>
   );
 }

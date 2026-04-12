@@ -43,21 +43,21 @@ const gym = {
   },
 
   hero: {
-    title: "Resultados reales en",
-    highlight: "pocas semanas",
-    subtitle: "Entrenamiento personalizado certificado",
-    description: `IronFit Gym es para TODOS.
-    Todos los que quieren y desean.
-    Entrenamientos personalizados con acompañamiento.`,
-    cta: "Agendar clase",
-    secondaryCta: "Ver programas",
-    miniBen1: "✔ Sin compromisos",
-    miniBen2: "✔ Respuesta rápida",
-    miniBen3: "✔ Entrenadores especializados",
-    socialTest: "+200 clientes ya entrenan con nosotros",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b",
-    altImage: "Personas entrenando en gimnasio",
-  },
+  title: "Transformá tu cuerpo en",
+  highlight: "90 días",
+  subtitle: "Sin rutinas genéricas. Con acompañamiento real.",
+  description: `Entrenamientos pensados para vos.
+Dejá de empezar y abandonar.
+Esta vez lo hacés bien, con resultados.`,
+  cta: "Empezar ahora",
+  secondaryCta: "Ver servicios",
+  miniBen1: "✔ Plan personalizado",
+  miniBen2: "✔ Seguimiento constante",
+  miniBen3: "✔ Resultados visibles",
+  socialTest: "+200 personas ya cambiaron su físico",
+  image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b",
+  altImage: "Personas entrenando en gimnasio",
+},
 
   about: {
     title: "Sobre Nosotros",
@@ -109,19 +109,25 @@ const gym = {
     subtitle: "Resultados reales de quienes entrenan con nosotros",
 
     items: [
-      {
-        name: "Martín Pérez",
-        text: "Bajé 8kg en 2 meses. Nunca había logrado esto antes.",
-      },
-      {
-        name: "Sofía López",
-        text: "Me ayudaron a lograr resultados que nunca había conseguido.",
-      },
-      {
-        name: "Juan Silva",
-        text: "Excelente gimnasio, muy completo y profesional.",
-      },
-    ],
+  {
+    name: "Martín Pérez",
+    text: "Bajé 8kg en 2 meses. Nunca había logrado esto antes.",
+    imageBefore: "https://images.pexels.com/photos/2261485/pexels-photo-2261485.jpeg",
+    imageAfter: "https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg",
+  },
+  {
+    name: "Sofía López",
+    text: "Me ayudaron a lograr resultados que nunca había conseguido.",
+    imageBefore: "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg",
+    imageAfter: "https://images.pexels.com/photos/414029/pexels-photo-414029.jpeg",
+  },
+  {
+    name: "Juan Silva",
+    text: "Excelente gimnasio, muy completo y profesional.",
+    imageBefore: "https://images.pexels.com/photos/3838388/pexels-photo-3838388.jpeg",
+    imageAfter: "https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg",
+  },
+],
   },
 
   footer: {
@@ -148,41 +154,41 @@ const gym = {
 
   faq: {
   title: "Preguntas Frecuentes",
-  subtitle: "¡Que las dudas no frenen tus resultados!",
+  subtitle: "Sacate las dudas y empezá hoy",
   items: [
-  {
-    question: "¿Cuáles son los horarios del gimnasio?",
-    answer: "Abrimos de lunes a sábado de 7:00 a 22:00. Consultanos por horarios especiales en feriados."
-  },
-  {
-    question: "¿Puedo entrenar si soy principiante?",
-    answer: "Sí, no necesitás experiencia previa. Nuestro equipo te guía desde el primer día con una rutina adaptada a tu nivel."
-  },
-  {
-    question: "¿Cuánto tiempo tarda en verse resultados?",
-    answer: "Depende de cada persona, pero con constancia podés empezar a notar cambios en pocas semanas."
-  },
-  {
-    question: "¿Hay entrenadores disponibles?",
-    answer: "Sí, contamos con entrenadores que te acompañan y ayudan a mejorar tu técnica y progreso."
-  },
-  {
-    question: "¿Se puede hacer una clase de prueba?",
-    answer: "Sí, podés venir a probar sin compromiso. Contactanos para agendar tu primera clase."
-  },
-  {
-    question: "¿Qué necesito para empezar?",
-    answer: "Solo ropa cómoda, ganas de entrenar y nosotros nos encargamos del resto."
-  },
-  {
-    question: "¿Ofrecen planes mensuales o descuentos?",
-    answer: "Sí, tenemos diferentes planes según tus objetivos. Consultanos y te recomendamos el mejor para vos."
-  },
-  {
-    question: "¿Hay clases grupales o solo entrenamiento libre?",
-    answer: "Ofrecemos ambas opciones: podés entrenar por tu cuenta o sumarte a nuestras clases grupales."
-  }
-]
+    {
+      question: "¿Necesito experiencia para empezar?",
+      answer: "No. Justamente trabajamos con personas que arrancan desde cero. Te guiamos paso a paso con un plan adaptado a tu nivel."
+    },
+    {
+      question: "¿Cuánto tiempo tarda en verse resultados?",
+      answer: "Con constancia, podés empezar a notar cambios en pocas semanas. Muchos de nuestros alumnos ven mejoras claras en los primeros 30 a 90 días."
+    },
+    {
+      question: "¿Y si nunca fui constante entrenando?",
+      answer: "No es falta de disciplina, es falta de un sistema. Acá tenés acompañamiento, seguimiento y estructura para que no abandones."
+    },
+    {
+      question: "¿Cuántas veces por semana tengo que entrenar?",
+      answer: "Depende de tu objetivo, pero normalmente entre 3 y 5 veces por semana ya podés lograr resultados reales."
+    },
+    {
+      question: "¿Cuánto cuesta entrenar?",
+      answer: "Tenemos diferentes planes según tus objetivos. Lo mejor es que nos escribas y te recomendamos la mejor opción para vos."
+    },
+    {
+      question: "¿Puedo probar antes de decidir?",
+      answer: "Sí, podés venir a una clase de prueba sin compromiso. Es la mejor forma de conocer cómo trabajamos."
+    },
+    {
+      question: "¿Voy a tener alguien que me guíe?",
+      answer: "Sí. No estás solo. Vas a tener entrenadores que te acompañan, corrigen y siguen tu progreso."
+    },
+    {
+      question: "¿Qué necesito para empezar?",
+      answer: "Solo ganas de cambiar. Nosotros nos encargamos del resto: plan, seguimiento y acompañamiento."
+    }
+  ]
 },
 };
 

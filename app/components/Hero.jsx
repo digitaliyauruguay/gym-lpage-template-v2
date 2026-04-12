@@ -30,14 +30,14 @@ export default function Hero() {
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <a
               href="#contacto"
-              className="bg-[var(--primary)] text-white px-6 py-3 rounded-lg shadow-md hover:bg-[var(--primary-hover)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="bg-[var(--primary)] text-white px-8 py-4 text-lg rounded-lg shadow-md hover:bg-[var(--primary-hover)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-bounce"
             >
               {siteConfig.hero.cta}
             </a>
 
             <a
               href="#servicios"
-              className="border border-[var(--primary)] text-[var(--primary)] px-6 py-3 rounded-lg hover:bg-white-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              className="border border-[var(--primary)] text-[var(--primary)] px-8 py-4 text-lg rounded-lg hover:bg-white-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               {siteConfig.hero.secondaryCta}
             </a>
