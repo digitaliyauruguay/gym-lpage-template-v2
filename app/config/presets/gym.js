@@ -7,7 +7,7 @@ const gym = {
   branding: {
     name: "IronFit Gym",
     logoIcon: "Dumbbell",
-    ourServices: "Nuestros Servicios",
+    ourServices: "Servicios",
     servDescription: "¿Por qué elegirnos?",
     metaTitle: "IronFit Gym - Gimnasio profesional en Montevideo",
     metaDescription: "Entrenamiento profesional con planes personalizados. Fitness, fuerza, cardio y más en Montevideo.",
@@ -18,7 +18,7 @@ const gym = {
     services: "Servicios",
     about: "Sobre Nosotros",
     faq: "Preguntas Frecuentes",
-    contact: "Contacto",
+    contact: "Contáctanos",
   },
 
   contact: {
@@ -58,7 +58,7 @@ const gym = {
   },
 
   about: {
-    title: "Sobre nuestro gimnasio",
+    title: "Sobre Nosotros",
     sub1: "En IronFit Gym contamos con un equipo de entrenadores profesionales enfocados en ayudarte a alcanzar tus objetivos físicos.",
     sub2: "Nuestro espacio está equipado con tecnología moderna para ofrecerte una experiencia de entrenamiento completa y eficiente.",
     miniBen1: "✔ Más de 10 años de experiencia",
@@ -145,7 +145,7 @@ const gym = {
   },
 
   faq: {
-  title: "Preguntas frecuentes",
+  title: "Preguntas Frecuentes",
   subtitle: "¡Que las dudas no frenen tus resultados!",
   items: [
   {

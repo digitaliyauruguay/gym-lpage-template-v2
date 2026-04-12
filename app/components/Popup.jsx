@@ -1,87 +1,89 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle } from "lucide-react";
 
 export default function Popup() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  // ⏱️ aparece después de 8 segundos
   useEffect(() => {
+    // CHECKEAR SI YA SE MOSTRÓ
+    const alreadyShown = sessionStorage.getItem("popupShown");
+
+    if (alreadyShown) return;
+
     const timer = setTimeout(() => {
-      setOpen(true);
-    }, 8000);
+      setIsOpen(true);
+      sessionStorage.setItem("popupShown", "true");
+    }, 30000); // aparece a los 30 segundos
 
     return () => clearTimeout(timer);
   }, []);
 
+  const closePopup = () => {
+    setIsOpen(false);
+  };
+
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {open && (
-        <>
-          {/* BACKDROP */}
-          <motion.div
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          />
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      
+      {/* OVERLAY */}
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={closePopup}
+      ></div>
 
-          {/* POPUP */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 40 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 40 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 flex items-center justify-center z-50 px-4"
+      {/* POPUP */}
+      <div className="relative bg-white rounded-2xl shadow-xl p-8 max-w-md w-full mx-4 animate-fadeIn">
+
+        {/* BOTÓN CERRAR */}
+        <button
+          onClick={closePopup}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-xl"
+        >
+          ✕
+        </button>
+
+        {/* CONTENIDO */}
+        <h3 className="text-2xl font-bold text-gray-900 mb-3 text-center">
+          ¿Listo para dar el siguiente paso?
+        </h3>
+
+        <p className="text-gray-600 text-center mb-6">
+          Podés escribirnos directamente por WhatsApp o completar el formulario.
+        </p>
+
+        {/* BOTONES */}
+        <div className="flex flex-col gap-3">
+
+          {/* WHATSAPP */}
+          <a
+            href="https://wa.me/598123456789?text=Hola%20quiero%20información"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-500 text-white text-center py-3 rounded-lg hover:bg-green-600 transition"
           >
-            <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 relative">
+            Escribir por WhatsApp
+          </a>
 
-              {/* BOTÓN CERRAR */}
-              <button
-                onClick={() => setOpen(false)}
-                className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
-              >
-                ✕
-              </button>
+          {/* FORMULARIO */}
+          <a
+            href="#contacto"
+            onClick={closePopup}
+            className="bg-[var(--primary)] text-white text-center py-3 rounded-lg hover:bg-[var(--primary-hover)] transition"
+          >
+            Ir al formulario
+          </a>
+          {/* SEGUIR NAVEGANDO */}
+          <a
+            onClick={closePopup}
+            className="bg-blue-600 text-white text-center py-3 rounded-lg hover:bg-blue-800 transition cursor-pointer"
+          >
+            Seguir navegando
+          </a>
 
-              {/* CONTENIDO */}
-              <h2 className="text-2xl font-bold text-gray-900">
-                ¿Listo para empezar?
-              </h2>
-
-              <p className="mt-3 text-gray-600">
-                Contactanos ahora y empezá a ver resultados cuanto antes.
-              </p>
-
-              {/* BOTONES */}
-              <div className="mt-6 flex flex-col gap-3">
-
-                {/* FORMULARIO */}
-                <a
-                  href="#contacto"
-                  onClick={() => setOpen(false)}
-                  className="bg-[var(--primary)] text-white px-5 py-3 rounded-lg text-center hover:bg-[var(--primary-hover)] transition"
-                >
-                  Contactar por email
-                </a>
-
-                {/* WHATSAPP */}
-                <a
-                  href="https://wa.me/598123456789?text=Hola%20quiero%20info"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 bg-green-500 text-white px-5 py-3 rounded-lg hover:bg-green-600 transition"
-                >
-                  <MessageCircle size={18} />
-                  Enviar mensaje ahora
-                </a>
-
-              </div>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+        </div>
+      </div>
+    </div>
   );
 }

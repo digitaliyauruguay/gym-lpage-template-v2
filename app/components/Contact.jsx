@@ -23,47 +23,49 @@ export default function Contact() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!form.nombre || !form.email || !form.mensaje) {
-    setError(siteConfig.contact.messages.error1);
-    setSuccess("");
-    return;
-  }
+    // VALIDACIÓN
+    if (!form.nombre || !form.email || !form.mensaje) {
+      setError(siteConfig.contact.messages.error1);
+      setSuccess("");
+      return;
+    }
 
-  if (!form.email.includes("@")) {
-    setError(siteConfig.contact.messages.error2);
-    setSuccess("");
-    return;
-  }
+    if (!form.email.includes("@")) {
+      setError(siteConfig.contact.messages.error2);
+      setSuccess("");
+      return;
+    }
 
-  try {
+    try {
     const res = await fetch("https://formspree.io/f/mgorwkbb", {
       method: "POST",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
       },
       body: new FormData(e.target),
     });
 
-    if (res.ok) {
-      setError("");
-      setSuccess(siteConfig.contact.messages.success);
+      if (res.ok) {
+        setError("");
+        setSuccess(siteConfig.contact.messages.success);
 
-      setForm({
-        nombre: "",
-        email: "",
-        mensaje: "",
-      });
-    } else {
-      setError("Error al enviar. Intentá nuevamente.");
+        // LIMPIAR FORM
+        setForm({
+          nombre: "",
+          email: "",
+          mensaje: "",
+        });
+      } else {
+        setError("Error al enviar. Intentá nuevamente.");
+        setSuccess("");
+      }
+    } catch (err) {
+      setError("Error de conexión.");
       setSuccess("");
     }
-  } catch (err) {
-    setError("Error de conexión.");
-    setSuccess("");
-  }
-};
+  };
 
   return (
     <section id="contacto" className="py-24 md:py-32 bg-white">
@@ -85,6 +87,11 @@ export default function Contact() {
           onSubmit={handleSubmit}
           className="bg-gray-50 p-8 rounded-2xl shadow-md flex flex-col gap-5"
         >
+
+          {/* 🆕 TÍTULO DEL FORMULARIO */}
+          <h3 className="text-xl font-semibold text-center mb-2 text-lg tracking-wide text-gray-700">
+            Formulario de Contacto
+          </h3>
 
           {/* NOMBRE */}
           <div className="flex flex-col">
