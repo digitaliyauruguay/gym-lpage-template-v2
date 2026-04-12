@@ -85,13 +85,6 @@ export default function Navbar() {
           <a href="#contacto" onClick={() => setMenuOpen(false)}>
             {siteConfig.navBarItems.contact}
           </a>
-          <a href="https://wa.me/598123456789?text=Hola%20quiero%20agendar%20una%20consulta"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-green-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
- Enviar mensaje ahora
- {WhatsAppIcon && <WhatsAppIcon size={18} />} 
-</a>
         </div>
       )}
     </header>
