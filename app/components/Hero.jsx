@@ -52,7 +52,7 @@ useEffect(() => {
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <a
               href="#contacto"
-              className="bg-[var(--primary)] text-white px-8 py-4 text-lg rounded-lg shadow-md hover:bg-[var(--primary-hover)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-bounce"
+              className="bg-[var(--primary)] text-white px-8 py-4 text-lg rounded-lg shadow-md hover:bg-[var(--primary-hover)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
               {siteConfig.hero.cta}
             </a>
