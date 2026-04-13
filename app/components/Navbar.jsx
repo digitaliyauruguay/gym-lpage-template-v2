@@ -2,12 +2,10 @@
 import { iconMap } from "../lib/icons";
 import { useState } from "react";
 import { siteConfig } from "../config/site";
-import { MessageCircle } from "lucide-react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const LogoIcon = iconMap[siteConfig.branding.logoIcon];
-  const WhatsAppIcon = iconMap["MessageCircle"];
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow-md z-50 border-b border-gray-200">
@@ -53,7 +51,11 @@ export default function Navbar() {
           rel="noopener noreferrer"
           className="flex items-center gap-2 bg-green-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
    Enviar mensaje ahora
-   {WhatsAppIcon && <WhatsAppIcon size={18} />}
+<img
+  src="/icons/WhatsApp-icon.png"
+  alt="WhatsApp"
+  className="w-5 h-5 object-contain ml-1"
+/>
 </a>
         </div>
 

@@ -56,12 +56,12 @@ Esta vez lo hacés bien, con resultados.`,
   miniBen3: "✔ Resultados visibles",
   socialTest: "+200 personas ya cambiaron su físico",
 
-  images: [
-    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b",
-    "https://images.unsplash.com/photo-1599058917765-a780eda07a3e",
-    "https://images.unsplash.com/photo-1558611848-73f7eb4001ab",
-    "https://images.unsplash.com/photo-1594737625785-cb1c6a7f9b7f"
-  ],
+ images: [
+  "https://images.pexels.com/photos/4716816/pexels-photo-4716816.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/20418612/pexels-photo-20418612.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/16366501/pexels-photo-16366501.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/36327498/pexels-photo-36327498.jpeg?auto=compress&cs=tinysrgb&w=1200"
+],
 
   altImage: "Personas entrenando en gimnasio",
 },
