@@ -2,6 +2,13 @@
 import { useState } from "react";
 import { siteConfig } from "../config/site";
 
+// 🔥 IMPORT AIRTABLE
+import {
+  AIRTABLE_BASE_ID,
+  AIRTABLE_API_KEY,
+  AIRTABLE_TABLE_NAME,
+} from "../lib/airtable";
+
 export default function Contact() {
   const [form, setForm] = useState({
     nombre: "",
@@ -29,6 +36,8 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log("🚀 SUBMIT DISPARADO");
+
     // 🛡️ HONEYPOT (ANTI BOT)
     if (form.empresa) {
       return;
@@ -49,13 +58,11 @@ export default function Contact() {
       return;
     }
 
-    // 🆕 VALIDACIÓN NOMBRE
     if (form.nombre.length < 2) {
       setError("Ingresá un nombre válido.");
       return;
     }
 
-    // 🆕 VALIDACIÓN EMAIL PRO
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailRegex.test(form.email)) {
@@ -64,7 +71,6 @@ export default function Contact() {
       return;
     }
 
-    // 🆕 VALIDACIÓN MENSAJE
     if (form.mensaje.length < 10) {
       setError("El mensaje es demasiado corto.");
       return;
@@ -73,6 +79,48 @@ export default function Contact() {
     try {
       setLoading(true);
 
+      // ============================
+      // 🔥 1. ENVIAR A AIRTABLE
+      // ============================
+      console.log("🔥 ENVIANDO A AIRTABLE...");
+
+      try {
+        const airtableRes = await fetch(
+          `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              records: [
+                {
+                  fields: {
+                    name: form.nombre,
+                    email: form.email,
+                    message: form.mensaje,
+                  },
+                },
+              ],
+            }),
+          }
+        );
+
+        const airtableData = await airtableRes.json();
+
+        if (!airtableRes.ok) {
+          console.error("❌ ERROR AIRTABLE:", airtableData);
+        } else {
+          console.log("✅ AIRTABLE OK");
+        }
+      } catch (airtableError) {
+        console.error("❌ ERROR CONEXIÓN AIRTABLE:", airtableError);
+      }
+
+      // ============================
+      // 📩 2. FORMSPREE (NO TOCAR)
+      // ============================
       const res = await fetch("https://formspree.io/f/mgorwkbb", {
         method: "POST",
         headers: {
@@ -89,10 +137,8 @@ export default function Contact() {
         setError("");
         setSuccess(siteConfig.contact.messages.success);
 
-        // 🆕 GUARDAR TIEMPO (cooldown)
         localStorage.setItem("lastSubmit", Date.now());
 
-        // LIMPIAR FORM
         setForm({
           nombre: "",
           email: "",
@@ -104,6 +150,7 @@ export default function Contact() {
         setSuccess("");
       }
     } catch (err) {
+      console.error("❌ ERROR GENERAL:", err);
       setError("Error de conexión.");
       setSuccess("");
     } finally {
@@ -132,12 +179,11 @@ export default function Contact() {
           className="bg-gray-50 p-8 rounded-2xl shadow-md flex flex-col gap-5"
         >
 
-          {/* TÍTULO DEL FORMULARIO */}
           <h3 className="text-xl font-medium text-center mb-2 text-lg tracking-wide text-gray-700">
             Formulario de Contacto
           </h3>
 
-          {/* 🆕 HONEYPOT (oculto) */}
+          {/* HONEYPOT */}
           <input
             type="text"
             name="empresa"
