@@ -18,13 +18,14 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <body className={inter.className}>
 
-        {/* ✅ Google Analytics */}
+        {/* GOOGLE ANALYTICS (FORZADO) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-KMHHVYQSDE"
           strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script strategy="afterInteractive">
           {`
+            console.log("🔥 GA CARGANDO...");
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
