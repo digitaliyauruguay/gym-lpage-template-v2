@@ -14,14 +14,14 @@ export default function Contact() {
     nombre: "",
     email: "",
     mensaje: "",
-    empresa: "", // 🆕 honeypot
+    empresa: "", // honeypot
   });
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const COOLDOWN = 60000; // 🆕 60 segundos
+  const COOLDOWN = 60000;
 
   const handleChange = (e) => {
     setForm({
@@ -38,12 +38,10 @@ export default function Contact() {
 
     console.log("🚀 SUBMIT DISPARADO");
 
-    // 🛡️ HONEYPOT (ANTI BOT)
-    if (form.empresa) {
-      return;
-    }
+    // 🛡️ HONEYPOT
+    if (form.empresa) return;
 
-    // 🛡️ COOLDOWN (ANTI SPAM USER)
+    // 🛡️ COOLDOWN
     const lastSubmit = localStorage.getItem("lastSubmit");
 
     if (lastSubmit && Date.now() - lastSubmit < COOLDOWN) {
@@ -51,10 +49,9 @@ export default function Contact() {
       return;
     }
 
-    // VALIDACIÓN
+    // VALIDACIONES
     if (!form.nombre || !form.email || !form.mensaje) {
       setError(siteConfig.contact.messages.error1);
-      setSuccess("");
       return;
     }
 
@@ -67,7 +64,6 @@ export default function Contact() {
 
     if (!emailRegex.test(form.email)) {
       setError(siteConfig.contact.messages.error2);
-      setSuccess("");
       return;
     }
 
@@ -79,80 +75,55 @@ export default function Contact() {
     try {
       setLoading(true);
 
-      // ============================
-      // 🔥 1. ENVIAR A AIRTABLE
-      // ============================
       console.log("🔥 ENVIANDO A AIRTABLE...");
 
-      try {
-        const airtableRes = await fetch(
-          `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`,
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${AIRTABLE_API_KEY}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              records: [
-                {
-                  fields: {
-                    name: form.nombre,
-                    email: form.email,
-                    message: form.mensaje,
-                  },
+      const airtableRes = await fetch(
+        `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${AIRTABLE_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            records: [
+              {
+                fields: {
+                  name: form.nombre,
+                  email: form.email,
+                  message: form.mensaje,
                 },
-              ],
-            }),
-          }
-        );
-
-        const airtableData = await airtableRes.json();
-
-        if (!airtableRes.ok) {
-          console.error("❌ ERROR AIRTABLE:", airtableData);
-        } else {
-          console.log("✅ AIRTABLE OK");
+              },
+            ],
+          }),
         }
-      } catch (airtableError) {
-        console.error("❌ ERROR CONEXIÓN AIRTABLE:", airtableError);
+      );
+
+      const airtableData = await airtableRes.json();
+
+      if (!airtableRes.ok) {
+        console.error("❌ ERROR AIRTABLE:", airtableData);
+        setError("Error al guardar el mensaje.");
+        return;
       }
 
-      // ============================
-      // 📩 2. FORMSPREE (NO TOCAR)
-      // ============================
-      const res = await fetch("https://formspree.io/f/mgorwkbb", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: form.nombre,
-          email: form.email,
-          message: form.mensaje,
-        }),
+      console.log("✅ AIRTABLE OK");
+
+      setError("");
+      setSuccess(siteConfig.contact.messages.success);
+
+      localStorage.setItem("lastSubmit", Date.now());
+
+      setForm({
+        nombre: "",
+        email: "",
+        mensaje: "",
+        empresa: "",
       });
 
-      if (res.ok) {
-        setError("");
-        setSuccess(siteConfig.contact.messages.success);
-
-        localStorage.setItem("lastSubmit", Date.now());
-
-        setForm({
-          nombre: "",
-          email: "",
-          mensaje: "",
-          empresa: "",
-        });
-      } else {
-        setError("Error al enviar. Intentá nuevamente.");
-        setSuccess("");
-      }
     } catch (err) {
       console.error("❌ ERROR GENERAL:", err);
       setError("Error de conexión.");
-      setSuccess("");
     } finally {
       setLoading(false);
     }
