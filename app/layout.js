@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Script from "next/script"; // 👈 IMPORTANTE
+import Script from "next/script";
 import ThemeProvider from "./theme-provider";
 import { siteConfig } from "./config/site";
 
@@ -16,8 +16,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <head>
-        {/* Google Analytics */}
+      <body className={inter.className}>
+
+        {/* ✅ Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-KMHHVYQSDE"
           strategy="afterInteractive"
@@ -30,12 +31,11 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-KMHHVYQSDE');
           `}
         </Script>
-      </head>
 
-      <body className={inter.className}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
+
       </body>
     </html>
   );
